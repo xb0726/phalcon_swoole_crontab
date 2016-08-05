@@ -1,19 +1,20 @@
 # phalcon_swoole_crontab
 在phalcon框架下用swoole编写的crontab
 
-在https://github.com/osgochina/swoole-crontab基础上移植到phalcon框架中
+在 https://github.com/osgochina/swoole-crontab 基础上移植到phalcon框架中
 
-1.概述
+###1.概述
 
 基于swoole的定时器程序，支持秒级处理.
 异步多进程处理。
 完全兼容crontab语法，且支持秒的配置,可使用数组规定好精确操作时间
 请使用swoole扩展1.7.9-stable及以上版本.Swoole
 支持worker处理redis队列任务
-2.配置的支持
+
+###  2.配置的支持### 
 
 具体配置文件请看 config/crontab.php 介绍一下时间配置
-
+<code>
 0   1   2   3   4   5
 |   |   |   |   |   |
 |   |   |   |   |   +------ day of week (0 - 6) (Sunday=0)
@@ -22,8 +23,11 @@
 |   |   +---------- hour (0 - 23)
 |   +------------ min (0 - 59)
 +-------------- sec (0-59)[可省略，如果没有0位,则最小时间粒度是分钟]
-3.帮助信息
+</code>
 
+###  3.帮助信息### 
+
+<code>
 * Usage: /path/to/php main.php [options] -- [args...]
 
 * -h [--help]        显示帮助信息
@@ -39,10 +43,12 @@
 * --worker           开启worker 可以针对redis队列读取并编写处理逻辑
 * --tasktype         task任务获取类型,[file|mysql] 默认是file
 * --checktime        默认精确对时(如果精确对时,程序则会延时到分钟开始0秒启动) 值为false则不精确对时
-4.worker进程配置
+</code>
+
+###  4.worker进程配置### 
 
 在config/worker.php 中写入配置，并且启动的时候加上 --worker选项就能启动worker工作进程 配置如下:
-
+<code>
 return array(
     //key是要加载的worker类名
     "ReadBook"=>array(
@@ -53,12 +59,15 @@ return array(
         )
     )
 );
+
+</code>
+
 具体的业务逻辑在/tasks/ 文件夹下。可以自己定义业务逻辑类，只需要继承AbstractWorker.php中的AbstractWorker类就可以
 
-5.例子
+### 5.例子### 
 
 你可以在配置文件中加上以下配置:
-
+<code>
 return array(
     'taskid1' =>
         array(
@@ -73,6 +82,8 @@ return array(
                 ),
         ),
 );
+</code>
+
 然后,执行
 
 /path/to/php main.php -s start
