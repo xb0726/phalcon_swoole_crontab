@@ -4,12 +4,13 @@
 在 https://github.com/osgochina/swoole-crontab 基础上移植到phalcon框架中
 
 ###1.概述
-
+<pre>
 基于swoole的定时器程序，支持秒级处理.
 异步多进程处理。
 完全兼容crontab语法，且支持秒的配置,可使用数组规定好精确操作时间
 请使用swoole扩展1.7.9-stable及以上版本.Swoole
 支持worker处理redis队列任务
+</pre>
 
 ###2.配置的支持
 
